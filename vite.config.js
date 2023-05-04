@@ -5,7 +5,7 @@ import {VitePWA} from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/to-do-list/',
+  baseUrl: '',
   plugins: [
     vue(),
     VitePWA({
