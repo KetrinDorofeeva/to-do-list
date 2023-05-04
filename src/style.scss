@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main-container {
+  padding: 30px 70px;
+}
+
+/*Модальное окно*/
+.modal {
+  background: rgba(0, 0, 0, 0.5);
+}
+.modal-header {
+  padding: 30px 40px !important;
+}
+.modal-body {
+  padding: 30px 40px !important;
+}
+
+/*Поле пустое*/
+.is-invalid-label {
+  color: #c11d13;
+}
+
+/*Кнопка "Создать"*/
+.btn.create-new {
+  width: 100%;
+  height: 50px;
+  background: #f0f5ff;
+  color: #314b99;
+  font-size: 18px;
+
+  &:hover {
+    background: #314b99;
+    color: #f0f5ff;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .main-container {
+    padding: 30px 20px
+  }
+
+  /*Модальное окно*/
+  .modal-dialog {
+    margin: 20px !important;
+  }
+  .modal-header {
+    padding: 25px 20px !important;
+  }
+  .modal-body {
+    padding: 25px 20px !important;
+  }
+}
