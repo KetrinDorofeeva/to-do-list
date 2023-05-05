@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router";
+import {createRouter, createWebHistory, createWebHashHistory} from "vue-router";
 import Tasks from "./components/Tasks.vue";
 import AuthForm from "./components/AuthForm.vue";
 
@@ -18,7 +18,8 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(process.env.NODE_ENV === 'production' ? '/to-do-list/' : '/'),
+    history: createWebHashHistory(),
+    //history: createWebHistory(process.env.NODE_ENV === 'production' ? '/to-do-list/' : '/'),
     routes
 })
 
