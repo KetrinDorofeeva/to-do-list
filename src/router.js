@@ -18,8 +18,8 @@ const routes = [
 ]
 
 const router = createRouter({
-    routes,
-    history: createWebHistory(import.meta.env.BASE_URL)
+    history: createWebHistory(process.env.NODE_ENV === 'production' ? '/to-do-list/' : '/'),
+    routes
 })
 
 export default router
