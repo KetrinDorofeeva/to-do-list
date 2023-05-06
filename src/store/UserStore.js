@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {ref, watch} from "vue";
+import {ref} from "vue";
 import router from "../router.js";
 
 export const useUserStore = defineStore('userStore', () => {

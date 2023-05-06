@@ -18,8 +18,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHashHistory(process.env.NODE_ENV === 'production' ? '/to-do-list/' : '/'),
-    //history: createWebHistory(process.env.NODE_ENV === 'production' ? '/to-do-list/' : '/'),
+    history: createWebHistory(process.env.NODE_ENV === 'production' ? '/to-do-list/' : '/'),
     routes
 })
 
