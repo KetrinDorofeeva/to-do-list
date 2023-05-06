@@ -136,7 +136,7 @@ createApp(App)
 npm install vue-router@4
 ```
 
-**2. Создаем ```router.js``` в папке ```/src/```**  
+**2. Создадим ```router.js``` в папке ```/src/```**  
 Создается объект маршрутизатора с помощью функции ```createRouter()```, которая поставляется библиотекой ```vue-router```. Затем в массиве ```routes``` определяются маршруты, которые сопоставляют пути запроса и компоненты. Каждый маршрут определяет свойство ```path```, которое представляет путь запроса, и свойство ```component``` - компонент, который будет обрабатывать запрос по этому пути.
 ```js
 import {createRouter} from "vue-router";
@@ -219,7 +219,7 @@ createApp(App)
 
 В хранилище ```UserStore.js``` указаны:
 
-1. Реактивный ref-объект users, содержащий в себе свойства ```id```, ```login```, ```password``` и ```name```. Значения логина и пароля используются при авторизации;
+1. Реактивный ref-объект ```users```, содержащий в себе свойства ```id```, ```login```, ```password``` и ```name```. Значения логина и пароля используются при авторизации;
 2. Реактивная переменная ```auth```, указывающая на состояние авторизованного пользователя;
 3. Функция ```logout()```, использующаяся для выхода авторизованного пользователя из аккаунта.
 
@@ -366,6 +366,311 @@ export const useUserStore = defineStore('userStore', () => {
 <img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/completed-authorization.png" alt = "Заполненная авторизация"/>
 
 https://user-images.githubusercontent.com/93386515/236624246-f6233fca-ed01-47fd-84e0-c4e4896b7cf6.mp4
+
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+### <p id = "tasks-page">Страница задач</p>
+Создадим хранилище ```TasksStore.js``` в папке ```/src/store/```.  
+Хранилище определяется с помощью ```defineStore()``` и что для него требуется уникальное имя, передаваемое в качестве первого аргумента.
+
+В хранилище ```TasksStore.js``` указаны:
+
+1. Реактивный ref-массив ```tasks```, содержащий в себе объекты со свойствами ```id```, ```description```, ```priority```, ```date_creation```, ```date_completion``` и ```folder```;  
+2. Реактивная переменная ```dialogVisible```, указывающая на статус открытия модального окна;  
+3. Реактивный ref-массив ```prioritys```, содержащий в себе объекты со свойствами ```id```, ```label``` и ```value```;  
+4. Функция ```showModal()``` для открытия модального окна;  
+5. Функция ```closeModal()``` для закрытия модального окна;  
+6. Функция ```deleteTask()``` для удаления задачи;  
+7. Функция ```watch()```, в которой информация о задачах сохраняется в ```localStorage```. При перезагрузке страницы созданные задачи не пропадут.
+
+```js
+import {defineStore} from "pinia";
+import {ref, watch} from "vue";
+
+export const useTasksStore = defineStore('tasksStore', () => {
+  //Массив задач
+  const tasks = ref([
+    {
+      id: 1,
+      description: "Размещение новостей на сайте",
+      priority: "Низкий",
+      date_creation: "22.04.2023",
+      date_completion: "27.04.2023",
+      folder: 'Все задачи'
+    },
+    {
+      id: 2,
+      description: "Внедрить Wi-fi для читателей",
+      priority: "Средний",
+      date_creation: "25.03.2023",
+      date_completion: "26.03.2023",
+      folder: 'Все задачи'
+    },
+    {
+      id: 3,
+      description: "Отредактировать раздел 'Доступная среда'",
+      priority: "Высокий",
+      date_creation: "15.03.2023",
+      date_completion: "17.03.2023",
+      folder: 'Все задачи'
+    },
+    {
+      id: 4,
+      description: "Презентация 'Информационные технологии'",
+      priority: "Средний",
+      date_creation: "15.03.2023",
+      date_completion: "18.03.2023",
+      folder: 'Все задачи'
+    },
+    {
+      id: 5,
+      description: "Счетчики - внедрить дизайн",
+      priority: "Средний",
+      date_creation: "09.03.2023",
+      date_completion: "10.03.2023",
+      folder: 'Все задачи'
+    },
+    {
+      id: 6,
+      description: "Внедрит новый layout",
+      priority: "Средний",
+      date_creation: "07.03.2023",
+      date_completion: "08.03.2023",
+      folder: 'Все задачи'
+    },
+    {
+      id: 7,
+      description: "Скролл в новостях",
+      priority: "Низкий",
+      date_creation: "01.03.2023",
+      date_completion: "02.03.2023",
+      folder: 'Все задачи'
+    },
+    {
+      id: 8,
+      description: "Форма сброса пароля",
+      priority: "Средний",
+      date_creation: "25.02.2023",
+      date_completion: "27.02.2023",
+      folder: 'Все задачи'
+    },
+    {
+      id: 9,
+      description: "Внедрение модуля Chat",
+      priority: "Низкий",
+      date_creation: "20.02.2023",
+      date_completion: "21.02.2023",
+      folder: 'Все задачи'
+    }
+  ]);
+
+  //Статус открытия модального окна
+  const dialogVisible = ref(false)
+
+  //Массив приоритетов
+  const prioritys = ref([
+    {
+      id: 1,
+      label: 'Низкий',
+      value: 'low'
+    },
+    {
+      id: 2,
+      label: 'Средний',
+      value: 'medium'
+    },
+    {
+      id: 3,
+      label: 'Высокий',
+      value: 'high'
+    }
+  ])
+
+  //Показать модальное окно
+  const showModal = () => {
+    dialogVisible.value = true
+  }
+
+  //Закрыть модальное окно
+  const closeModal = () => {
+    dialogVisible.value = false
+  }
+
+  //Удалить задачу
+  const deleteTask = (id) => {
+    if (confirm(`Вы уверены, что хотите удалить данную задачу?`)) {
+      tasks.value = tasks.value.filter((el) => el.id !== id);
+    }
+  };
+
+  const tasksInLocalStorage = localStorage.getItem("tasks")
+  if(tasksInLocalStorage) {
+    tasks.value = JSON.parse(tasksInLocalStorage)._value
+  }
+
+  watch(
+    () => tasks,
+    (state) => {
+      localStorage.setItem("tasks", JSON.stringify(state))
+    },
+    {deep: true}
+  )
+
+  return {
+    tasks, prioritys, dialogVisible, showModal, closeModal, deleteTask
+  }
+})
+```
+
+<br>
+
+Создадим хранилище ```FoldersStore.js``` в папке ```/src/store/```. В нем будут указаны:
+
+1. Реактивный ref-массив ```folders```, содержащий в себе объекты со свойствами ```id``` и ```title```;  
+2. Реактивная переменная ```dialogVisible```, указывающая на статус открытия модального окна;  
+3. Функция ```showModal()``` для открытия модального окна;  
+4. Функция ```closeModal()``` для закрытия модального окна;  
+5. Функция ```watch()```, в которой информация о папках сохраняется в ```localStorage```. При перезагрузке страницы созданные папки не пропадут.
+
+```js
+import {defineStore} from "pinia";
+import {ref, watch} from "vue";
+
+export const useFoldersStore = defineStore('foldersStore', () => {
+  const folders = ref([
+    {
+      id: 1,
+      title: 'Все задачи'
+    },
+    {
+      id: 2,
+      title: 'В процессе'
+    },
+    {
+      id: 3,
+      title: 'Выполнено'
+    }
+  ])
+
+  //Статус открытия модального окна
+  const dialogVisible = ref(false)
+
+  //Показать модальное окно
+  const showModal = () => {
+    dialogVisible.value = true
+  }
+
+  //Закрыть модальное окно
+  const closeModal = () => {
+    dialogVisible.value = false
+  }
+
+  const foldersInLocalStorage = localStorage.getItem("folders")
+  if(foldersInLocalStorage) {
+    folders.value = JSON.parse(foldersInLocalStorage)._value
+  }
+
+  watch(
+    () => folders,
+    (state) => {
+      localStorage.setItem("folders", JSON.stringify(state))
+    },
+    {deep: true}
+  )
+
+  return {
+    folders, dialogVisible, showModal, closeModal
+  }
+})
+```
+
+<br>
+
+Создадим компонент ```Tasks.vue``` в папке ```/src/components/```.  
+В нем будут реализованы:
+
+1. Обращение к авторизованному пользователю;
+2. Иконка создания задачи;
+3. Иконка выхода пользователя из аккаунта.
+
+И подключены компоненты:
+
+1. Создания задачи ```ModalFormCreateTask.vue``` в папке ```/src/components/```;
+2. Задачи ```Task.vue``` в папке ```/src/components/```
+
+В скрипте подключаем компоненты ```Task.vue``` и ```ModalFormCreateTask``` и хранилища ```TasksStore.js``` и ```UserStore.js```
+```js
+<script setup>
+  import {useTasksStore} from "../store/TasksStore.js";
+  import {useUserStore} from "../store/UserStore.js";
+
+  import Task from "./Task.vue";
+  import ModalFormCreateTask from "./ModalFormCreateTask.vue";
+
+  const tasksStore = useTasksStore()
+  const userStore = useUserStore()
+</script>
+```
+
+В шаблоне ```template``` обращаемся к хранилищам из скрипта. Из ```UserStore.js``` достаем свойство ```name``` объекта ```users```, при клике на иконку создания задачи срабатывает функция ```showModal``` хранилища ```TasksStore.js```, при клике на иконку выхода пользователя из аккаунта срабатывает функция ```logout``` хранилища ```UserStore.js```.
+```vue
+<template>
+  <div class="d-flex justify-content-between">
+    <h2>{{userStore.users.name}}, это ваш To do list</h2>
+
+    <div class="d-flex">
+      <div class="img-plus" @click="tasksStore.showModal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" class="svg-plus">
+            <path fill="#314b99" d="M17 14h2v3h3v2h-3v3h-2v-3h-3v-2h3v-3M5 3h14c1.11 0 2 .89 2 2v7.8c-.61-.35-1.28-.6-2-.72V5H5v14h7.08c.12.72.37 1.39.72 2H5c-1.11 0-2-.89-2-2V5c0-1.11.89-2 2-2m2 4h10v2H7V7m0 4h10v1.08c-.85.14-1.63.46-2.32.92H7v-2m0 4h5v2H7v-2Z"/>
+        </svg>
+      </div>
+      <div class="img-logout" @click="userStore.logout">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" class="svg-logout">
+          <path fill="#c11d32" d="M5 21q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h7v2H5v14h7v2H5Zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5l-5 5Z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <ModalFormCreateTask></ModalFormCreateTask>
+
+  <Task class="mt-4"></Task>
+</template>
+```
+
+<br>
+
+Создадим компонент ```Task.vue``` в папке ```/src/components/```.  
+В нем будут реализованы:
+
+<ol>
+  <li>Список папок;</li>
+  <li>Поле поиска задач по описанию;</li>
+  <li>Сортировка по дате, приоритету, от А до Я и от Я до А;</li>
+  <li>Задачи. Каждая задача включает в себя:</li>
+  <ol type="1">
+    <li>Статус выполнения (галочка);</li>
+    <li>Описание;</li>
+    <li>Приоритет;</li>
+    <li>Дата создания;</li>
+    <li>Срок выполнения;</li>
+    <li>Папка;</li>
+    <li>Иконка редактирования задачи;</li>
+    <li>Иконка удаления задачи.</li>
+  </ol>
+</ol>
+
+В ```<script setup>``` подключаем хранилища ```TasksStore.js``` и ```FoldersStore.js```
+```js
+<script setup>
+  import {useFoldersStore} from "../store/FoldersStore.js";
+  import {useTasksStore} from "../store/TasksStore.js";
+
+  const folderStore = useFoldersStore()
+  const taskStore = useTasksStore()
+</script>
+```
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
