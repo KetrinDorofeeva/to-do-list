@@ -60,5 +60,9 @@ npm create vite@latest
 4. **Выбрать язык программирования JavaScript**
 <img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/programming-language.png" width="50%" alt = "Язык программирования"/>
 
+Итог установки:  
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/installation-summary.png" width="50%" alt = "Итог установки"/>
+
+
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
