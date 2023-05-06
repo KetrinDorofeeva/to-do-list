@@ -86,6 +86,11 @@ npm i
 ```js
 npm run dev
 ```
+Итог:
+
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/launch-project.png" width="50%" alt = "Запуск проекта"/>
+
+Перейдите по ссылке Local, чтобы увидеть проект в браузере.
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
