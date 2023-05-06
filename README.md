@@ -30,7 +30,7 @@
 - <a href = "#documentation">Документация</a>
 - <a href = "#vue3-framework">Установка и запуск фреймворка Vue 3 (Vite)</a>
 - <a href = "#installation-pinia">Установка Pinia</a>
-- <a href = "#installation-vue-router">Установка vue-router</a>
+- <a href = "#installation-vue-router">Установка Vue Router</a>
 - <a href = "#implementation-software-product">Реализация программного продукта</a>
   - <a href = "#authorization">Авторизация</a>
   - <a href = "#tasks-page">Страница задач</a>
@@ -43,6 +43,7 @@ ________________________________________________________________________________
 - [Vite](https://vitejs.dev/)
 - [Vue 3](https://v3.ru.vuejs.org/)
 - [Pinia](https://pinia.vuejs.org/)
+- [Vue Router](https://router.vuejs.org/)
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
@@ -119,16 +120,75 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import App from './App.vue'
 
 createApp(App)
-    .use(createPinia()) //!
-    .use(router)
-    .mount('#app')
+  .use(createPinia()) //!
+  .use(router)
+  .mount('#app')
 ```
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
 
-## <p id = "installation-vue-router">Установка vue-router</p> 
+## <p id = "installation-vue-router">Установка Vue Router</p> 
+**[Vue Router](https://router.vuejs.org/installation.html)** — маршрутизатор для Vue.js.
 
+**1. Установка vue-router**
+```js
+npm install vue-router@4
+```
+
+**2. Создаем ```router.js``` в папке ```/src/```**  
+Создается объект маршрутизатора с помощью функции ```createRouter()```, которая поставляется библиотекой ```vue-router```. Затем в массиве ```routes``` определяются маршруты, которые сопоставляют пути запроса и компоненты. Каждый маршрут определяет свойство ```path```, которое представляет путь запроса, и свойство ```component``` - компонент, который будет обрабатывать запрос по этому пути.
+```js
+import {createRouter} from "vue-router";
+import Tasks from "./components/Tasks.vue";
+import AuthForm from "./components/AuthForm.vue";
+
+const routes = [
+  {
+    path: '/',
+    component: AuthForm
+  },
+  {
+    path: '/tasks',
+    component: Tasks
+  }
+]
+
+const router = createRouter({
+  history: createWebHistory(process.env.NODE_ENV === 'production' ? '/to-do-list/' : '/'),
+  routes
+})
+
+export default router
+```
+
+**3. Подключение ```router.js``` в ```/src/main.js```**
+```js
+import {createApp} from 'vue'
+import {createPinia} from "pinia"
+import router from "./router.js"; //!
+
+import './style.scss'
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import App from './App.vue'
+
+createApp(App)
+  .use(createPinia())
+  .use(router) //!
+  .mount('#app')
+```
+
+**4. Подключение ```router-view``` в ```/src/App.vue```**  
+**router-view** - отобразит компонент, соответствующий URL-адресу. Его можно разместить в любом месте, чтобы адаптировать к макету.
+```vue
+<template>
+  <div class="main-container">
+    <AuthForm v-if="userStore.auth === false && localStorage != null"></AuthForm>
+    <router-view v-else></router-view>
+  </div>
+</template>
+```
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
@@ -304,6 +364,8 @@ export const useUserStore = defineStore('userStore', () => {
 <img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/blank-authorization.png" alt = "Незаполненная авторизация"/>
 
 <img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/completed-authorization.png" alt = "Заполненная авторизация"/>
+
+https://user-images.githubusercontent.com/93386515/236624246-f6233fca-ed01-47fd-84e0-c4e4896b7cf6.mp4
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
