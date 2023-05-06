@@ -24,11 +24,32 @@
 </table>
 
 ## <p id = "table-of-contents">Оглавление</p>
-- <a href = "#vue3-framework">Фреймворк Vue 3</a>
-  - <a href = "#installing-vue3-framework">Установка Vue 3 (Vite)</a>
+- <a href = "#documentation">Документация</a>
+- <a href = "#vue3-framework">Установка и запуск фреймворка Vue 3 (Vite)</a>
 - <a href = "#implementation-software-product">Реализация программного продукта</a>
   - <a href = "#authorization">Авторизация</a>
   - <a href = "#tasks-page">Страница задач</a>
   - <a href = "#add-task">Добавить задачу</a>
   - <a href = "#update-task">Редактировать задачу</a>
   - <a href = "#delete-task">Удалить задачу</a>
+
+_________________________________________________________________________________________________________________________________________________________________
+## <p id = "documentation">Документация</p>
+- [Vite](https://vitejs.dev/)
+- [Vue 3](https://v3.ru.vuejs.org/)
+- [Pinia](https://pinia.vuejs.org/)
+
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+## <p id = "vue3-framework">Установка и запуск фреймворка Vue 3 (Vite)</p>
+Для начала нужно [установить и настроить Vite](https://vitejs.dev/guide/)  
+**Vite** — это инструмент сборки, цель которого — обеспечить более быструю и экономичную разработку современных веб-проектов.
+
+1. **Установка Vite**  
+С npm:
+```js
+npm create vite@latest
+```
+2. **Дать название проекту**
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/name-project.png" alt = "Название проекта"/>
