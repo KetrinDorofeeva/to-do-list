@@ -99,3 +99,25 @@ npm run dev
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
 
 ## <p id = "implementation-software-product">Реализация программного продукта</p>
+### <p id = "authorization">Авторизация</p>
+Поля и их заполнение:
+<table>
+  <tr>
+    <td><b>Поля</b></td>
+    <td><b>Обязательность заполнения</b></td>
+    <td><b>Правила заполнения</b></td>
+  </tr>
+  <tr>
+    <td>Логин</td>
+    <td>Да</td>
+    <td>test</td>
+  </tr>
+  <tr>
+    <td>Пароль</td>
+    <td>Да</td>
+    <td>test</td>
+  </tr>
+</table>
+
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
