@@ -78,6 +78,10 @@ cd to-do-list
 npm i
 ```
 
+Итог:
+
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/total.png" width="50%" alt = "Итог"/>
+
 **6. Запустить проект** 
 ```js
 npm run dev
