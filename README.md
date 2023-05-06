@@ -46,23 +46,42 @@ ________________________________________________________________________________
 Для начала нужно [установить и настроить Vite](https://vitejs.dev/guide/)  
 **Vite** — это инструмент сборки, цель которого — обеспечить более быструю и экономичную разработку современных веб-проектов.
 
-1. **Установка Vite**  
+**1. Установка Vite**  
 С npm:
 ```js
 npm create vite@latest
 ```
-2. **Дать название проекту**
+**2. Дать название проекту**  
+
 <img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/name-project.png" width="50%" alt = "Название проекта"/>
 
-3. **Выбрать фреймворк Vue**
+**3. Выбрать фреймворк Vue**  
+
 <img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/select-framework.png" width="50%" alt = "Выбор фреймворка"/>
 
-4. **Выбрать язык программирования JavaScript**
+**4. Выбрать язык программирования JavaScript**  
+
 <img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/programming-language.png" width="50%" alt = "Язык программирования"/>
 
-Итог установки:  
-<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/installation-summary.png" width="50%" alt = "Итог установки"/>
+Итог:  
 
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/installation-summary.png" width="50%" alt = "Итог"/>
+
+**5. Завершить настройку проекта**  
+Перейти в проект:
+```js
+cd to-do-list
+```
+
+Установить соответствующие пакеты:
+```js
+npm i
+```
+
+**6. Запустить проект** 
+```js
+npm run dev
+```
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
