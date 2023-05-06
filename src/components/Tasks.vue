@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-  import {useFoldersStore} from "../store/FoldersStore.js";
+  //import {useFoldersStore} from "../store/FoldersStore.js";
   import {useTasksStore} from "../store/TasksStore.js";
   import {useUserStore} from "../store/UserStore.js";
 
@@ -37,7 +37,7 @@
   //import ModalFormCreateFolder from "./ModalFormCreateFolder.vue";
   import ModalFormCreateTask from "./ModalFormCreateTask.vue";
 
-  const foldersStore = useFoldersStore()
+  //const foldersStore = useFoldersStore()
   const tasksStore = useTasksStore()
   const userStore = useUserStore()
 </script>
