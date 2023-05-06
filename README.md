@@ -53,3 +53,6 @@ npm create vite@latest
 ```
 2. **Дать название проекту**
 <img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/name-project.png" alt = "Название проекта"/>
+
+3. **Выбрать фреймворк**
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/select-framework.png" alt = "Выбор фреймворка"/>
