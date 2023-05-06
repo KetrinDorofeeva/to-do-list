@@ -301,5 +301,9 @@ export const useUserStore = defineStore('userStore', () => {
 </script>
 ```
 
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/blank-authorization.png" alt = "Незаполненная авторизация"/>
+
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/completed-authorization.png" alt = "Заполненная авторизация"/>
+
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
