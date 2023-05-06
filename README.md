@@ -53,19 +53,19 @@ npm create vite@latest
 ```
 **2. Дать название проекту**  
 
-<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/name-project.png" width="50%" alt = "Название проекта"/>
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/name-project.png" width="70%" alt = "Название проекта"/>
 
 **3. Выбрать фреймворк Vue**  
 
-<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/select-framework.png" width="50%" alt = "Выбор фреймворка"/>
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/select-framework.png" width="70%" alt = "Выбор фреймворка"/>
 
 **4. Выбрать язык программирования JavaScript**  
 
-<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/programming-language.png" width="50%" alt = "Язык программирования"/>
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/programming-language.png" width="70%" alt = "Язык программирования"/>
 
 Итог:  
 
-<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/installation-summary.png" width="50%" alt = "Итог"/>
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/installation-summary.png" width="70%" alt = "Итог"/>
 
 **5. Завершить настройку проекта**  
 Перейти в проект:
@@ -80,7 +80,7 @@ npm i
 
 Итог:
 
-<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/total.png" width="50%" alt = "Итог"/>
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/total.png" width="70%" alt = "Итог"/>
 
 **6. Запустить проект** 
 ```js
@@ -88,7 +88,7 @@ npm run dev
 ```
 Итог:
 
-<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/launch-project.png" width="50%" alt = "Запуск проекта"/>
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/launch-project.png" width="70%" alt = "Запуск проекта"/>
 
 Перейдите по ссылке Local, чтобы увидеть проект в браузере.
 
