@@ -94,3 +94,5 @@ npm run dev
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+## <p id = "implementation-software-product">Реализация программного продукта</p>
