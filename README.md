@@ -52,7 +52,13 @@ ________________________________________________________________________________
 npm create vite@latest
 ```
 2. **Дать название проекту**
-<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/name-project.png" alt = "Название проекта"/>
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/name-project.png" width="50%" alt = "Название проекта"/>
 
-3. **Выбрать фреймворк**
-<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/select-framework.png" alt = "Выбор фреймворка"/>
+3. **Выбрать фреймворк Vue**
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/select-framework.png" width="50%" alt = "Выбор фреймворка"/>
+
+4. **Выбрать язык программирования JavaScript**
+<img src="https://github.com/ketrindorofeeva/to-do-list/raw/main/for-readme/programming-language.png" width="50%" alt = "Язык программирования"/>
+
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
