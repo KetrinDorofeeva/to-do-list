@@ -137,10 +137,10 @@
         name: 'Task',
         data() {
             return {
+                specificFolder: 'all-tasks',
                 searchDescription: '',
                 sortby: 'date',
-                edit: false,
-                specificFolder: 'all-tasks'
+                edit: false
             }
         },
         methods: {
