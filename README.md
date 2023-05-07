@@ -651,7 +651,7 @@ export const useFoldersStore = defineStore('foldersStore', () => {
 <ol>
   <li>Список папок;</li>
   <li>Поле поиска задач по описанию;</li>
-  <li>Сортировка по дате, приоритету, от А до Я и от Я до А;</li>
+  <li>Сортировка по дате завершения, приоритету, от А до Я и от Я до А;</li>
   <li>Задачи. Каждая задача включает в себя:</li>
   <ol type="1">
     <li>Статус выполнения (галочка);</li>
@@ -769,5 +769,98 @@ export const useFoldersStore = defineStore('foldersStore', () => {
 </script>
  ```
  
- <br>
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+#### <p id = "tasks-sorting">Сортировка задач</p>
+В компоненте ```Task.vue``` в скрипте подключаем ```moment.js```.  
+**Moment.js** — это одна из самых популярных JavaScript-библиотек для разбора и форматирования дат.
+
+В функции ```data()``` создаем свойство ```sortby```, отвечающее за выбор определенной сортировки.  
+В ```computed``` скрипта создаем функцию ```searchAndSort()```, в которой прописываем связь с функцией ```searchDesc()```. Метод массива ```.sort()``` на месте сортирует элементы массива и возвращает отсортированный массив.
+
+Сортировка задач происходит:
+- По дате завершения;
+- По приоритету;
+- От А до Я;
+- От Я до А.
+
+При сортировке "По дате завершения" обращаемся к библиотеке ```moment.js```. Идет обращение к свойству ```date_completion``` массива ```tasks```, задается формат даты ```DD.MM.YY```. При данной сортировке сначала идут задачи, созданные позже предыдущих.
+
+При сортировке "По приоритету" идет обращение к длине свойства ```priority``` массива ```tasks```, также используется метод ```localeCompare()```.  
+**localeCompare()** - возвращает число, указывающее, должна ли данная строка находиться до, после или в том же самом месте, что и строка, переданная через параметр, при сортировке этих строк.  
+При данной сортировке сначала идут задачи высокого, затем среднего и только потом низкого приоритета.
+
+При сортировке "От А до Я" и "От Я до А" идет обращение к свойству ```description``` массива ```tasks```, также используется метод ```localeCompare()```. При сортировке "От А до Я" задачи сначала идут по возрастанию, а при сортировке "От Я до А" - по убыванию.
+
+```js
+<script>
+  import {useFoldersStore} from "../store/FoldersStore.js";
+  import {useTasksStore} from "../store/TasksStore.js";
+  import moment from "moment/moment.js";
+
+  export default {
+    name: 'Task',
+    data() {
+      return {
+        specificFolder: 'all-tasks',
+        searchDescription: '',
+        sortby: 'date', //!
+      }
+    },
+    computed: {
+      getTasksInFolder() {
+        let array = useTasksStore().tasks;
+
+        //Определенные задачи в определенных папках
+        return array.filter(task => {
+          if (this.specificFolder === 'all-tasks') {
+            return task.folder
+          }
+
+          if (this.specificFolder === 'in-process') {
+            return task.folder === 'В процессе'
+          }
+
+          if (this.specificFolder === 'done-tasks') {
+            return task.folder === 'Выполнено'
+          }
+        })
+      },
+      searchDesc() {
+        //Поиск задач по названию
+        return this.getTasksInFolder.filter(task => {
+          return task.description.toLowerCase().includes(this.searchDescription.toLowerCase())
+        })
+      },
+      searchAndSort() { //!
+        //Сортировка
+        return this.searchDesc.sort((a, b) => {
+          //По дате завершения
+          if (this.sortby === 'date') {
+            return moment(b.date_completion, 'DD.MM.YY') - moment(a.date_completion, 'DD.MM.YY')
+          }
+
+          //По приоритету
+          if (this.sortby === 'priority') {
+            return b.priority.length - a.priority.length || a.priority.localeCompare(b.priority);
+          }
+
+          //От А до Я
+          if (this.sortby === 'from_a_to_z') {
+            return a.description.localeCompare(b.description)
+          }
+
+          //От Я до А
+          if (this.sortby === 'from_z_to_a') {
+            return b.description.localeCompare(a.description)
+          }
+        })
+      }
+    }
+  }
+</script>
+```
+
+<br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
