@@ -1091,5 +1091,53 @@ https://user-images.githubusercontent.com/93386515/236671687-3aca15ed-b857-4aec-
 </script>
 ```
 
+Шаблон ```template``` компонента ```ModalFormCreateTask.vue```.
+```vue
+<template>
+  <div v-if="taskStore.dialogVisible === true" class="modal d-block py-5" id="modalFormCreateTask">
+    <div @click.stop class="modal-dialog">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header pb-4 border-bottom-0">
+          <h3>Создать новую задачу</h3>
+          <button type="button" @click="taskStore.closeModal" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+
+        <div class="modal-body pt-0">
+          <form @submit.prevent>
+            <div class="form-floating mb-3">
+              <input type="text" @input="description = $event.target.value" :class="v$.description.required.$invalid ? 'is-invalid' : ''" class="form-control rounded-3" id="description">
+              <label for="description" :class="v$.description.required.$invalid ? 'is-invalid-label' : ''" class="col-form-label fst-italic">
+                Описание
+              </label>
+            </div>
+            <div class="form-floating mb-3">
+              <select @input="priority = $event.target.value" :class="v$.priority.required.$invalid ? 'is-invalid' : ''" id="priority" class="form-select">
+                <option selected>Выберите приоритет</option>
+                <option v-for="priority in taskStore.prioritys" :key="priority.id" :value="priority.label">
+                  {{priority.label}}
+                </option>
+              </select>
+              <label for="priority" :class="v$.priority.required.$invalid ? 'is-invalid-label' : ''" class="col-form-label fst-italic">
+                Приоритет
+              </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input @input="date_completion = $event.target.value" v-maska data-maska="##.##.####" :class="v$.date_completion.required.$invalid ? 'is-invalid' : ''" class="form-control rounded-3" id="date-completion-create">
+              <label for="date-completion-create" :class="v$.date_completion.required.$invalid ? 'is-invalid-label' : ''" class="col-form-label fst-italic">
+                Срок выполнения (22.05.2023)
+              </label>
+            </div>
+
+            <button type="submit" @click="createTask" class="btn create-new mt-4">Создать</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+```
+
+https://user-images.githubusercontent.com/93386515/236677694-49a3e82a-0d57-4270-8cb6-e9bc00349a2d.mp4
+
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
