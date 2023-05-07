@@ -9,7 +9,7 @@ export const useTasksStore = defineStore('tasksStore', () => {
             description: "Размещение новостей на сайте",
             priority: "Низкий",
             date_creation: "22.04.2023",
-            date_completion: "27.04.2023",
+            date_completion: "23.06.2023",
             folder: 'Все задачи'
         },
         {
@@ -17,7 +17,7 @@ export const useTasksStore = defineStore('tasksStore', () => {
             description: "Внедрить Wi-fi для читателей",
             priority: "Средний",
             date_creation: "25.03.2023",
-            date_completion: "26.03.2023",
+            date_completion: "22.06.2023",
             folder: 'Все задачи'
         },
         {
@@ -25,7 +25,7 @@ export const useTasksStore = defineStore('tasksStore', () => {
             description: "Отредактировать раздел 'Доступная среда'",
             priority: "Высокий",
             date_creation: "15.03.2023",
-            date_completion: "17.03.2023",
+            date_completion: "21.06.2023",
             folder: 'Все задачи'
         },
         {
@@ -33,7 +33,7 @@ export const useTasksStore = defineStore('tasksStore', () => {
             description: "Презентация 'Информационные технологии'",
             priority: "Средний",
             date_creation: "15.03.2023",
-            date_completion: "18.03.2023",
+            date_completion: "20.06.2023",
             folder: 'Все задачи'
         },
         {
