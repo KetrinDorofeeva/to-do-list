@@ -49,6 +49,7 @@
     - <a href = "#update-task">Редактировать задачу</a>
     - <a href = "#delete-task">Удалить задачу</a>
 - <a href = "#project-deployment">Развертывание проекта на GitHub</a>
+- <a href = "#project-problems">Неполадки с проектом на GitHub</a>
 
 _________________________________________________________________________________________________________________________________________________________________
 ## <p id = "documentation">Документация</p>
@@ -1282,6 +1283,44 @@ https://user-images.githubusercontent.com/93386515/236680774-a517c287-e025-41b5-
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
 
 ## <p id = "project-deployment">Развертывание проекта на GitHub</p>
+**1. Установите ```base``` на ```/vite.config.js```.**
+```js
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+  base:
+      process.env.NODE_ENV === "production"
+          ? "/to-do-list/"
+          : "/",
+})
+```
+
+**2. Удалить ```dist``` из ```/.gitignore```.**
+
+**3. Публиковать проект.**
+```js
+npm run build
+```
+
+**4. Убедиться, что зафиксировано и нажато origin master/main.**
+
+**5. Использовать поддерево.**
+```js
+git subtree push --prefix dist origin gh-pages
+```
+
+**6. Перейти в репозиторий проекта и открыть ```Settings > Pages > Build and deployment```.**  
+В ```Branch``` выбрать ветку ```gh-pages```. Нажать "Сохранить".
+
+**7. Сделано.**  
+Открыть проект в браузере.
+
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+## <p id = "project-problems">Неполадки с проектом на GitHub</p>
+При обновлении страницы 
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
