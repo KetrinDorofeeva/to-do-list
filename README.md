@@ -55,6 +55,7 @@ ________________________________________________________________________________
 - [Vue 3](https://v3.ru.vuejs.org/)
 - [Pinia](https://pinia.vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
+- [Moment.js](https://momentjs.com/)
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
@@ -785,7 +786,7 @@ https://user-images.githubusercontent.com/93386515/236672096-d8077c14-aa21-4243-
 
 #### <p id = "tasks-sorting">Сортировка задач</p>
 В компоненте ```Task.vue``` в скрипте подключаем ```moment.js```.  
-**Moment.js** — это одна из самых популярных JavaScript-библиотек для разбора и форматирования дат.
+**[Moment.js](https://momentjs.com/)** — это одна из самых популярных JavaScript-библиотек для разбора и форматирования дат.
 
 В функции ```data()``` создаем свойство ```sortby```, отвечающее за выбор определенной сортировки.  
 В ```computed``` скрипта создаем функцию ```searchAndSort()```, в которой прописываем связь с функцией ```searchDesc()```. Метод массива ```.sort()``` на месте сортирует элементы массива и возвращает отсортированный массив.
@@ -1002,6 +1003,93 @@ https://user-images.githubusercontent.com/93386515/236672225-88417e0b-3735-4cd1-
 ```
 
 https://user-images.githubusercontent.com/93386515/236671687-3aca15ed-b857-4aec-86a4-8c357798c230.mp4
+
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+#### <p id = "add-task">Добавить задачу</p>
+В компоненте ```Tasks.vue``` указана иконка создания задачи. При клике на нее идет обращение к функции ```showModal()``` хранилища ```TasksStore.js```, которая отвечает за всплывание модального окна.
+
+Иконка в шаблоне ```template``` компонента ```Tasks.vue```.
+```vue
+<div class="img-plus" @click="tasksStore.showModal">
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" class="svg-plus">
+    <path fill="#314b99" d="M17 14h2v3h3v2h-3v3h-2v-3h-3v-2h3v-3M5 3h14c1.11 0 2 .89 2 2v7.8c-.61-.35-1.28-.6-2-.72V5H5v14h7.08c.12.72.37 1.39.72 2H5c-1.11 0-2-.89-2-2V5c0-1.11.89-2 2-2m2 4h10v2H7V7m0 4h10v1.08c-.85.14-1.63.46-2.32.92H7v-2m0 4h5v2H7v-2Z"/>
+  </svg>
+</div>
+```
+
+Создадим компонент ```ModalFormCreateTask.vue```.  
+В ```<script setup>``` компонента подключаем хранилище ```TasksStore.js```.
+```js
+<script setup>
+  import {useTasksStore} from "../store/TasksStore.js";
+
+  const taskStore = useTasksStore();
+</script>
+```
+
+В функции ```data()``` создаем свойства ```id```, ```description```, ```priority```, ```date_creation```, ```date_completion```, ```isDone``` и ```folder```.  
+В ```methods``` прописываем функцию ```createTask()```, в которой создаем объект ```newTask```, ссылающийся на свойства из ```data()```. Далее, проверяем поля ```description```, ```priority``` и ```date_completion``` на пустоту. Если они не пустые, то при помощи метода ```.push()``` добавляем объект ```newTask``` в массив ```tasks``` и закрываем модальное окно.
+
+```js
+<script>
+  import {useTasksStore} from "../store/TasksStore.js";
+
+  import useVuelidate from "@vuelidate/core";
+  import {required} from "@vuelidate/validators";
+
+  import {vMaska} from "maska";
+
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const format = ('0' + day).slice(-2) + '.' + ('0' + month).slice(-2) + '.' + year;
+
+  export default {
+    name: "ModalFormCreateTask",
+    data() {
+      return {
+        v$: useVuelidate(),
+        id: Date.now(),
+        description: '',
+        priority: '',
+        date_creation: `${format}`,
+        date_completion: '',
+        isDone: false,
+        folder: 'Все задачи'
+      }
+    },
+    validations() {
+      return {
+        description: {required},
+        priority: {required},
+        date_completion: {required}
+      }
+    },
+    methods: {
+      createTask(event) {
+        const newTask = {
+          id: this.id,
+          description: this.description,
+          priority: this.priority,
+          date_creation: this.date_creation,
+          date_completion: this.date_completion,
+          isDone: this.isDone,
+          folder: this.folder
+        }
+
+        if (this.description && this.priority && this.date_completion) {
+          useTasksStore().tasks.push(newTask)
+
+          useTasksStore().dialogVisible = false;
+        }
+      }
+    }
+  }
+</script>
+```
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
