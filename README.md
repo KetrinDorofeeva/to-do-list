@@ -48,6 +48,7 @@
     - <a href = "#add-task">Добавить задачу</a>
     - <a href = "#update-task">Редактировать задачу</a>
     - <a href = "#delete-task">Удалить задачу</a>
+- <a href = "#project-deployment">Развертывание проекта на GitHub</a>
 
 _________________________________________________________________________________________________________________________________________________________________
 ## <p id = "documentation">Документация</p>
@@ -1248,6 +1249,39 @@ https://user-images.githubusercontent.com/93386515/236677694-49a3e82a-0d57-4270-
 ```
 
 https://user-images.githubusercontent.com/93386515/236679749-391a17de-aaa4-43cb-8a52-06c4d65d4e4e.mp4
+
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+
+#### <p id = "delete-task">Удалить задачу</p>
+При клике на иконку шаблона ```template``` компонента ```Task.vue```, отвечающую за удаление задачи по ```id```, срабатывает функция ```deleteTask()``` хранилища ```TasksStore.js```. В этот момент всплывает окно подтверждения удаления задачи. Если нажать "ОК" задача удалится.
+
+Иконка шаблона ```template``` компонента ```Task.vue```.
+```vue
+<div @click="taskStore.deleteTask(task.id)" class="basket">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 15 15">
+    <path fill="#c11d13" d="m12.41 5.58l-1.34 8a.5.5 0 0 1-.49.41H4.42a.5.5 0 0 1-.49-.41l-1.34-8A.5.5 0 0 1 3.08 5h8.83a.5.5 0 0 1 .5.58zM13 3.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1 0-1H5V1.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5V3h2.5a.5.5 0 0 1 .5.5zM9 3V2H6v1h3z"/>
+  </svg>
+</div>
+```
+
+Функция ```deleteTask()``` хранилища ```TasksStore.js```.
+```js
+//Удалить задачу
+const deleteTask = (id) => {
+  if (confirm(`Вы уверены, что хотите удалить данную задачу?`)) {
+    tasks.value = tasks.value.filter((el) => el.id !== id);
+  }
+};
+```
+
+https://user-images.githubusercontent.com/93386515/236680774-a517c287-e025-41b5-861f-c72a9bc70c22.mp4
+
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+## <p id = "project-deployment">Развертывание проекта на GitHub</p>
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
