@@ -407,7 +407,7 @@ export const useTasksStore = defineStore('tasksStore', () => {
       description: "Размещение новостей на сайте",
       priority: "Низкий",
       date_creation: "22.04.2023",
-      date_completion: "27.04.2023",
+      date_completion: "23.06.2023",
       folder: 'Все задачи'
     },
     {
@@ -415,7 +415,7 @@ export const useTasksStore = defineStore('tasksStore', () => {
       description: "Внедрить Wi-fi для читателей",
       priority: "Средний",
       date_creation: "25.03.2023",
-      date_completion: "26.03.2023",
+      date_completion: "22.06.2023",
       folder: 'Все задачи'
     },
     {
@@ -423,7 +423,7 @@ export const useTasksStore = defineStore('tasksStore', () => {
       description: "Отредактировать раздел 'Доступная среда'",
       priority: "Высокий",
       date_creation: "15.03.2023",
-      date_completion: "17.03.2023",
+      date_completion: "21.06.2023",
       folder: 'Все задачи'
     },
     {
@@ -431,7 +431,7 @@ export const useTasksStore = defineStore('tasksStore', () => {
       description: "Презентация 'Информационные технологии'",
       priority: "Средний",
       date_creation: "15.03.2023",
-      date_completion: "18.03.2023",
+      date_completion: "20.06.2023",
       folder: 'Все задачи'
     },
     {
@@ -727,6 +727,8 @@ export const useFoldersStore = defineStore('foldersStore', () => {
   }
 </script>
  ```
+
+https://user-images.githubusercontent.com/93386515/236671929-225e16d9-19b6-46c6-9920-09ba8fa34bd0.mp4
  
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
@@ -775,7 +777,9 @@ export const useFoldersStore = defineStore('foldersStore', () => {
   }
 </script>
  ```
- 
+
+https://user-images.githubusercontent.com/93386515/236672096-d8077c14-aa21-4243-a2e4-b4afe07c56c1.mp4
+
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
 
@@ -868,6 +872,136 @@ export const useFoldersStore = defineStore('foldersStore', () => {
   }
 </script>
 ```
+
+https://user-images.githubusercontent.com/93386515/236672225-88417e0b-3735-4cd1-bf0c-faedf2ef9e9d.mp4
+
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+#### <p id = "final-template">Итоговый шаблон задач</p>
+```vue
+<template>
+  <div class="table-responsive">
+    <div class="d-flex align-items-center sort-select">
+      <div class="text-sort folder">Папки:</div>
+      <select v-model="specificFolder" class="form-select">
+        <option value="all-tasks">Все задачи</option>
+        <option value="in-process">В процессе</option>
+        <option value="done-tasks">Выполнено</option>
+      </select>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between mt-4">
+      <div class="d-flex align-items-center search-input">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+          <path fill="#59bba6" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14z"/>
+        </svg>
+        <input type="text" @input="searchDescription = $event.target.value" class="form-control" placeholder="Поиск по описанию">
+      </div>
+
+      <div class="d-flex align-items-center sort-select">
+        <div class="text-sort">Сортировать по:</div>
+        <select v-model="sortby" class="form-select">
+          <option value="date">Дата</option>
+          <option value="priority">Приоритет</option>
+          <option value="from_a_to_z">От А до Я</option>
+          <option value="from_z_to_a">От Я до А</option>
+        </select>
+      </div>
+    </div>
+
+    <table class="table table-bordered mt-4">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col" class="border-start border-2 border-secondary">Описание</th>
+          <th scope="col" class="border-start border-2 border-secondary">Приоритет</th>
+          <th scope="col" class="border-start border-2 border-secondary">Дата создания</th>
+          <th scope="col" class="border-start border-2 border-secondary">Срок выполнения</th>
+          <th scope="col" class="border-start border-2 border-secondary">Папка</th>
+          <th scope="col" class="border-start border-2 border-secondary"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <transition-group name="tasks-list">
+          <tr
+            v-for="task in searchAndSort" :key="task.id"
+            :class="[{active_tr: task.isDone === true}, {overdue_task: moment(task.date_completion, 'DD.MM.YYYY').isBefore(Date.now(), 'DD.MM.YYYY')}]"
+            class="border-top border-2"
+          >
+            <td class="check-mark">
+              <div @click="task.isDone = !task.isDone">
+                <svg v-if="!task.isDone" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 256 256">
+                  <path fill="currentColor" d="M128 28a100 100 0 1 0 100 100A100.11 100.11 0 0 0 128 28Zm0 192a92 92 0 1 1 92-92a92.1 92.1 0 0 1-92 92Z"/>
+                </svg>
+
+                <svg v-else xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 256 256">
+                  <path fill="#27b24a" d="M172.24 99.76a6 6 0 0 1 0 8.48l-56 56a6 6 0 0 1-8.48 0l-24-24a6 6 0 0 1 8.48-8.48L112 151.51l51.76-51.75a6 6 0 0 1 8.48 0ZM230 128A102 102 0 1 1 128 26a102.12 102.12 0 0 1 102 102Zm-12 0a90 90 0 1 0-90 90a90.1 90.1 0 0 0 90-90Z"/>
+                </svg>
+              </div>
+            </td>
+
+            <td>
+              <span v-if="!edit">{{task.description}}</span>
+              <div v-else>
+                <textarea rows="4" cols="30" v-model.lazy="task.description"></textarea>
+              </div>
+            </td>
+
+            <td :class="[{text_blue: task.priority === 'Низкий'}, {text_yellow: task.priority === 'Средний'}, {text_red: task.priority === 'Высокий'}]">
+              <span v-if="!edit">{{task.priority}}</span>
+              <select v-else v-model.lazy="task.priority" class="form-select">
+                <option v-for="priority in taskStore.prioritys" :key="priority.id" :value="priority.label">
+                  {{priority.label}}
+                </option>
+              </select>
+            </td>
+
+            <td>{{task.date_creation}}</td>
+
+            <td>
+              <span v-if="!edit">{{task.date_completion}}</span>
+              <div v-else>
+                <input v-model.lazy="task.date_completion" class="form-control"/>
+              </div>
+            </td>
+
+            <td>
+              <span v-if="!edit">{{task.folder}}</span>
+              <select v-else v-model.lazy="task.folder" class="form-select">
+                <option v-for="folder in folderStore.folders" :key="folder.id" :value="folder.title">
+                  {{folder.title}}
+                </option>
+              </select>
+            </td>
+
+            <td class="d-flex justify-content-between">
+              <div v-if="!edit" @click="showEdit" class="edit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                  <path fill="#314b99" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 5.63l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75l1.83-1.83a.996.996 0 0 0 0-1.41z"/>
+                </svg>
+              </div>
+              <div v-else @click="hideEdit" class="edit-check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24">
+                  <path fill="#59bba6" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275q.275.275.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l1.9 1.9Z"/>
+                </svg>
+              </div>
+              <div @click="taskStore.deleteTask(task.id)" class="basket">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 15 15">
+                  <path fill="#c11d13" d="m12.41 5.58l-1.34 8a.5.5 0 0 1-.49.41H4.42a.5.5 0 0 1-.49-.41l-1.34-8A.5.5 0 0 1 3.08 5h8.83a.5.5 0 0 1 .5.58zM13 3.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1 0-1H5V1.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5V3h2.5a.5.5 0 0 1 .5.5zM9 3V2H6v1h3z"/>
+                </svg>
+              </div>
+            </td>
+          </tr>
+        </transition-group>
+      </tbody>
+    </table>
+  </div>
+</template>
+```
+
+https://user-images.githubusercontent.com/93386515/236671687-3aca15ed-b857-4aec-86a4-8c357798c230.mp4
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
