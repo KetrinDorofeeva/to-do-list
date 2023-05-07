@@ -681,10 +681,10 @@ export const useFoldersStore = defineStore('foldersStore', () => {
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
 
- #### <p id = "tasks-folders">Папки с задачами</p>
- В компоненте ```Task.vue``` в скрипте подключаем хранилища ```FoldersStore.js``` и ```TasksStore.js```.  
- В функции ```data()``` создаем свойство ```specificFolder```, отвечающее за выбор определенной папки.  
- В ```computed``` создаем функцию ```getTasksInFolder()```, в которой прописываем связь с массивом ```tasks``` хранилища ```TasksStore.js```. Метод массива ```.filter()``` позволяет получить новый массив, отфильтровав элементы с помощью переданной колбэк-функции. Прописываем условия, в которых сказано, что, если пользователь выберет определенное значение, то в браузере выведутся задачи, в которых ```folder``` равен данному значению.
+#### <p id = "tasks-folders">Папки с задачами</p>
+В компоненте ```Task.vue``` в скрипте подключаем хранилища ```FoldersStore.js``` и ```TasksStore.js```.  
+В функции ```data()``` создаем свойство ```specificFolder```, отвечающее за выбор определенной папки.  
+В ```computed``` создаем функцию ```getTasksInFolder()```, в которой прописываем связь с массивом ```tasks``` хранилища ```TasksStore.js```. Метод массива ```.filter()``` позволяет получить новый массив, отфильтровав элементы с помощью переданной колбэк-функции. Прописываем условия, в которых сказано, что, если пользователь выберет определенное значение, то в браузере выведутся задачи, в которых ```folder``` равен данному значению.
  ```js
  <script>
   import {useFoldersStore} from "../store/FoldersStore.js";
@@ -722,4 +722,52 @@ export const useFoldersStore = defineStore('foldersStore', () => {
  ```
  
 <br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+#### <p id = "search-for-tasks-by-name">Поиск задач по описанию</p>
+В компоненте ```Task.vue``` в ```computed``` скрипта создаем функцию ```searchDesc()```, в которой прописываем связь с функцией ```getTasksInFolder()```. Метод массива ```.filter()``` позволяет получить новый массив, отфильтровав элементы с помощью переданной колбэк-функции. Введенные данные в поле поиска сравниваются с данными из массива ```tasks```, а именно со свойством ```description```. Метод ```toLowerCase()``` возвращает значение строки, на которой он был вызван, преобразованное в нижний регистр.
+ ```js
+ <script>
+  import {useFoldersStore} from "../store/FoldersStore.js";
+  import {useTasksStore} from "../store/TasksStore.js";
+  
+  export default {
+    name: 'Task',
+    data() {
+      return {
+        specificFolder: 'all-tasks',
+        searchDescription: '', //!
+      }
+    },
+    computed: {
+      getTasksInFolder() {
+        let array = useTasksStore().tasks;
+
+        //Определенные задачи в определенных папках
+        return array.filter(task => {
+          if (this.specificFolder === 'all-tasks') {
+            return task.folder
+          }
+
+          if (this.specificFolder === 'in-process') {
+            return task.folder === 'В процессе'
+          }
+
+          if (this.specificFolder === 'done-tasks') {
+            return task.folder === 'Выполнено'
+          }
+        })
+      },
+      searchDesc() { //!
+        //Поиск задач по названию
+        return this.getTasksInFolder.filter(task => {
+          return task.description.toLowerCase().includes(this.searchDescription.toLowerCase())
+        })
+      },
+    }
+  }
+</script>
+ ```
+ 
+ <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
