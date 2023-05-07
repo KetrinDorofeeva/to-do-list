@@ -1141,3 +1141,113 @@ https://user-images.githubusercontent.com/93386515/236677694-49a3e82a-0d57-4270-
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+#### <p id = "update-task">Редактировать задачу</p>
+В скрипте компонента ```Task.vue``` в функции ```data()``` прописываем свойство ```edit```, отвечающее за доступ к редактированию задачи.  
+В ```methods``` создаем функции ```showEdit()```, которая отвечает за открытие полей редактирования, и ```hideEdit()```, которая отвечает за закрытие полей редактирования.
+```js
+<script>
+  import {useFoldersStore} from "../store/FoldersStore.js";
+  import {useTasksStore} from "../store/TasksStore.js";
+  import moment from "moment/moment.js";
+
+  export default {
+    name: 'Task',
+    data() {
+      return {
+        specificFolder: 'all-tasks',
+        searchDescription: '',
+        sortby: 'date',
+        edit: false //!
+      }
+    },
+    methods: {
+      showEdit() { //!
+        this.edit = true
+      },
+      hideEdit() { //!
+        this.edit = false
+      }
+    },
+    computed: {
+      getTasksInFolder() {
+        let array = useTasksStore().tasks;
+
+        //Определенные задачи в определенных папках
+        return array.filter(task => {
+          if (this.specificFolder === 'all-tasks') {
+            return task.folder
+          }
+
+          if (this.specificFolder === 'in-process') {
+            return task.folder === 'В процессе'
+          }
+
+          if (this.specificFolder === 'done-tasks') {
+            return task.folder === 'Выполнено'
+          }
+        })
+      },
+      searchDesc() {
+        //Поиск задач по названию
+        return this.getTasksInFolder.filter(task => {
+          return task.description.toLowerCase().includes(this.searchDescription.toLowerCase())
+        })
+      },
+      searchAndSort() { //!
+        //Сортировка
+        return this.searchDesc.sort((a, b) => {
+          //По дате завершения
+          if (this.sortby === 'date') {
+            return moment(b.date_completion, 'DD.MM.YY') - moment(a.date_completion, 'DD.MM.YY')
+          }
+
+          //По приоритету
+          if (this.sortby === 'priority') {
+            return b.priority.length - a.priority.length || a.priority.localeCompare(b.priority);
+          }
+
+          //От А до Я
+          if (this.sortby === 'from_a_to_z') {
+            return a.description.localeCompare(b.description)
+          }
+
+          //От Я до А
+          if (this.sortby === 'from_z_to_a') {
+            return b.description.localeCompare(a.description)
+          }
+        })
+      }
+    }
+  }
+</script>
+```
+
+Иконки шаблона ```template``` компонента ```Task.vue```, отвечающие за открытие и закрытие полей редактирования.
+```vue
+<div v-if="!edit" @click="showEdit" class="edit">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+    <path fill="#314b99" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 5.63l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75l1.83-1.83a.996.996 0 0 0 0-1.41z"/>
+  </svg>
+</div>
+<div v-else @click="hideEdit" class="edit-check">
+  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24">
+    <path fill="#59bba6" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275q.275.275.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l1.9 1.9Z"/>
+  </svg>
+</div>
+```
+
+Редактирование на примере поля ```description``` в шаблоне ```template``` компонента ```Task.vue```.
+```vue
+<td>
+  <span v-if="!edit">{{task.description}}</span>
+  <div v-else>
+    <textarea rows="4" cols="30" v-model.lazy="task.description"></textarea>
+  </div>
+</td>
+```
+
+https://user-images.githubusercontent.com/93386515/236679749-391a17de-aaa4-43cb-8a52-06c4d65d4e4e.mp4
+
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
