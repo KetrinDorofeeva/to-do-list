@@ -1320,7 +1320,7 @@ git subtree push --prefix dist origin gh-pages
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
 
 ## <p id = "project-problems">Неполадки с проектом на GitHub</p>
-При обновлении страницы 
+При обновлении страницы задач, возникает ошибка 404. На локальном сервере данной ошибки нет.
 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
