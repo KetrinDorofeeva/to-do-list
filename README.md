@@ -34,9 +34,13 @@
 - <a href = "#implementation-software-product">Реализация программного продукта</a>
   - <a href = "#authorization">Авторизация</a>
   - <a href = "#tasks-page">Страница задач</a>
-  - <a href = "#add-task">Добавить задачу</a>
-  - <a href = "#update-task">Редактировать задачу</a>
-  - <a href = "#delete-task">Удалить задачу</a>
+    - <a href = "#tasks-folders">Папки с задачами</a>
+    - <a href = "#search-for-tasks-by-name">Поиск задач по описанию</a>
+    - <a href = "#tasks-sorting">Сортировка задач</a>
+    - <a href = "#final-template">Итоговый шаблон задач</a>
+    - <a href = "#add-task">Добавить задачу</a>
+    - <a href = "#update-task">Редактировать задачу</a>
+    - <a href = "#delete-task">Удалить задачу</a>
 
 _________________________________________________________________________________________________________________________________________________________________
 ## <p id = "documentation">Документация</p>
@@ -301,7 +305,7 @@ export const useUserStore = defineStore('userStore', () => {
 
 ```
 
-Далее, прописываем шаблон ```template```:
+Далее, прописываем шаблон ```template```.
 ```vue
 <template>
     <div class="modal d-block py-5" id="modalSignin">
@@ -599,7 +603,7 @@ export const useFoldersStore = defineStore('foldersStore', () => {
 1. Создания задачи ```ModalFormCreateTask.vue``` в папке ```/src/components/```;
 2. Задачи ```Task.vue``` в папке ```/src/components/```
 
-В скрипте подключаем компоненты ```Task.vue``` и ```ModalFormCreateTask``` и хранилища ```TasksStore.js``` и ```UserStore.js```
+В скрипте подключаем компоненты ```Task.vue``` и ```ModalFormCreateTask``` и хранилища ```TasksStore.js``` и ```UserStore.js```.
 ```js
 <script setup>
   import {useTasksStore} from "../store/TasksStore.js";
@@ -661,7 +665,7 @@ export const useFoldersStore = defineStore('foldersStore', () => {
   </ol>
 </ol>
 
-В ```<script setup>``` подключаем хранилища ```TasksStore.js``` и ```FoldersStore.js```
+В ```<script setup>``` подключаем хранилища ```TasksStore.js``` и ```FoldersStore.js```.
 ```js
 <script setup>
   import {useFoldersStore} from "../store/FoldersStore.js";
@@ -672,5 +676,50 @@ export const useFoldersStore = defineStore('foldersStore', () => {
 </script>
 ```
 
+:exclamation: В следующих подпунктах описана поэтапная реализация структуры компонента ```Task.vue```.
+
+<br>
+:bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
+
+ #### <p id = "tasks-folders">Папки с задачами</p>
+ В компоненте ```Task.vue``` в скрипте подключаем хранилища ```FoldersStore.js``` и ```TasksStore.js```.  
+ В функции ```data()``` создаем свойство ```specificFolder```, отвечающее за выбор определенной папки.  
+ В ```computed``` создаем функцию ```getTasksInFolder()```, в которой прописываем связь с массивом ```tasks``` хранилища ```TasksStore.js```. Метод массива ```.filter()``` позволяет получить новый массив, отфильтровав элементы с помощью переданной колбэк-функции. Прописываем условия, в которых сказано, что, если пользователь выберет определенное значение, то в браузере выведутся задачи, в которых ```folder``` равен данному значению.
+ ```js
+ <script>
+  import {useFoldersStore} from "../store/FoldersStore.js";
+  import {useTasksStore} from "../store/TasksStore.js";
+
+  export default {
+    name: 'Task',
+    data() {
+      return {
+        specificFolder: 'all-tasks'
+      }
+    },
+    computed: {
+      getTasksInFolder() {
+        let array = useTasksStore().tasks;
+
+        //Определенные задачи в определенных папках
+        return array.filter(task => {
+          if (this.specificFolder === 'all-tasks') {
+            return task.folder
+          }
+
+          if (this.specificFolder === 'in-process') {
+            return task.folder === 'В процессе'
+          }
+
+          if (this.specificFolder === 'done-tasks') {
+            return task.folder === 'Выполнено'
+          }
+        })
+      },
+    }
+  }
+</script>
+ ```
+ 
 <br>
 :bookmark_tabs: <a href = "#table-of-contents">Оглавление</a>
