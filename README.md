@@ -22,7 +22,14 @@
     <td></td>
     <td><img src = "https://img.shields.io/badge/-Bootstrap-860afb?style=for-the-badge&logo=Bootstrap&labelColor=f3e7ff&logoColor=860afb" alt = "Bootstrap4"></td>
     <td></td>
-    <td><img src = "https://img.shields.io/badge/-vuerouter-41b883?style=for-the-badge&logo=vue-router&labelColor=ecf8f3&logoColor=41b883" alt = "vue-router"></td>
+    <td><img src = "https://img.shields.io/badge/-vuerouter-41b883?style=for-the-badge&logo=vue-router&labelColor=f0f8f7&logoColor=41b883" alt = "vue-router"></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><img src = "https://img.shields.io/badge/-moment.js-6cb5ab?style=for-the-badge&logo=moment.js&labelColor=f0f8f7&logoColor=6cb5ab" alt = "moment.js"></td>
   </tr>
 </table>
 
