@@ -129,9 +129,9 @@
 </script>
 
 <script>
+    import {useFoldersStore} from "../store/FoldersStore.js";
     import {useTasksStore} from "../store/TasksStore.js";
     import moment from "moment/moment.js";
-    import {useFoldersStore} from "../store/FoldersStore.js";
 
     export default {
         name: 'Task',
@@ -140,7 +140,6 @@
                 searchDescription: '',
                 sortby: 'date',
                 edit: false,
-
                 specificFolder: 'all-tasks'
             }
         },
