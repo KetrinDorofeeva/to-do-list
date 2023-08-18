@@ -7,6 +7,7 @@
     <td><b>Фреймворки</b></td>
     <td><b>Сервер разработки</b></td>
     <td><b>Библиотеки</b></td>
+    <td><b>Иконки</b></td> 
   </tr>
   
    <tr>
@@ -15,6 +16,7 @@
     <td><img src = "https://img.shields.io/badge/-Vue3-3fb27f?style=for-the-badge&logo=Vue.js&labelColor=ecf7f2&logoColor=3fb27f" alt = "Vue3.js"></td>
     <td><img src = "https://img.shields.io/badge/-Vite-0e2eee?style=for-the-badge&logo=Vite&labelColor=e7eafd&logoColor=0e2eee" alt = "Vite"></td>
     <td><img src = "https://img.shields.io/badge/-Pinia-ffe165?style=for-the-badge&logo=Pinia&labelColor=fffcf0&logoColor=ffe165" alt = "Pinia"></td>
+    <td><img src = "https://img.shields.io/badge/-Iconify-026c9c?style=for-the-badge&logo=Iconify&labelColor=e6f0f5&logoColor=026c9c" alt = "Iconify"></td>
   </tr>
   
    <tr>
@@ -23,6 +25,7 @@
     <td><img src = "https://img.shields.io/badge/-Bootstrap-860afb?style=for-the-badge&logo=Bootstrap&labelColor=f3e7ff&logoColor=860afb" alt = "Bootstrap4"></td>
     <td></td>
     <td><img src = "https://img.shields.io/badge/-vuerouter-41b883?style=for-the-badge&logo=vue-router&labelColor=f0f8f7&logoColor=41b883" alt = "vue-router"></td>
+    <td></td>
   </tr>
   <tr>
     <td></td>
@@ -30,6 +33,7 @@
     <td></td>
     <td></td>
     <td><img src = "https://img.shields.io/badge/-moment.js-6cb5ab?style=for-the-badge&logo=moment.js&labelColor=f0f8f7&logoColor=6cb5ab" alt = "moment.js"></td>
+    <td></td>
   </tr>
 </table>
 
